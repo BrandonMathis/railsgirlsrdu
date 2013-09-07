@@ -121,3 +121,34 @@ After that, type `localhost:3000` into your browser (chrome, safari). If you are
 
 You should see this page:  
 ![](http://i.imgur.com/SwKp4rB.jpg)
+
+###User Authentication
+For user authentication we are going to use a gem called [devise](http://rubygems.org/gems/devise) which will make this a snap.
+
+First, add devise to your Gemfile
+
+```
+gem 'devise'
+```
+Then, go to your terminal or command prompt and type the following
+
+```
+bundle install
+```
+
+Next, we are going to follow the steps for ['Getting Started'](https://github.com/plataformatec/devise#getting-started) in the devise readme to generate some User modules, controllers, and views.
+
+```
+rails generate devise:install
+rails generate devise User
+```
+
+The following code generated some models and migrations for us. In order to update our database to conencide with our new code we need to run the following.
+
+```
+rake db:migrate
+```
+
+Just like that we've added authentication to our application. Go to the url `localhost:3000/users/sign_up` to see the signup page and create a new user!
+
+>PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
