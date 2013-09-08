@@ -152,3 +152,97 @@ rake db:migrate
 Just like that we've added authentication to our application. Go to the url `localhost:3000/users/sign_up` to see the signup page and create a new user!
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
+
+###Tweets
+So, our first two requirements are complete (Users can create accounts andUsers can log into their accounts). Next up we have to deal with tweets.
+
+We are going to use rails generators to save some time. This will generate the code we need to create Tweets in our application.
+
+```
+rails generate model Tweet body:string user:references
+```
+
+This command create a Tweets model and a migration to create a tweets table where we can store the body of a tweet and the users who made the tweet.
+
+>PROTIP: `body:string` and `user:references` details the attributes of our tweets. 'references' pertains to an ID of the owning record. In our case, Tweets reference users who make them. You can add any attirbutes you want to a record in this manner when using generators.
+
+####Model
+
+The first is a Model called Tweet. We can use this Model to create, update, and destroy Tweets with commands like `Tweet.create`, `Tweet.update_attributes`, and `Tweet.destroy`. Take a look in your `app/models` directory. You should see a newly created file called `tweet.rb` with the following contents
+
+```
+class Tweet < ActiveRecord::Base
+  belongs_to :user
+end
+```
+
+This is an [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) Model. It is small now but it will expand as we add new features to our tweets.
+
+####Migration
+
+The next thing we created is a [Migration](http://guides.rubyonrails.org/migrations.html). Look inside your `db/migrations` directory. You will se a filed that looks something like `20130908173312_create_tweets.rb`. Your file's name may not be the same but the contents will be.
+
+```
+class CreateTweets < ActiveRecord::Migration
+  def change
+    create_table :tweets do |t|
+      t.string :body
+      t.references :user, index: true
+
+      t.timestamps
+    end
+  end
+end
+```
+
+This code will modify our database and create a table called 'tweets'. Lets run it to create that table. Type the following into your command prompt.
+
+```
+rake db:migrate
+```
+The output should look like this
+
+```
+==  CreateTweets: migrating ===================================================
+-- create_table(:tweets)
+   -> 0.0037s
+==  CreateTweets: migrated (0.0038s) ==========================================
+```
+
+Now that your table has been created, lets take a look at our views and controllers.
+
+> PROTIP: If you've run a migration that is incorrect in some way, run rake db:rollback to reset the migration an THEN go back to your migration code and fix it.
+
+####Controller/Views
+Create a new ruby file at `app/controllers` called 'tweets_controller.rb' with the following contents.
+
+```
+class TweetsController < ApplicationController
+end
+```
+
+Inside this controller we are going to create 3 actions `index`, `create`, and `new`. Lets get started!
+
+**index**
+
+Index will be a list of every sing tweet that every user made. Getting all these tweets is easy! Add the following code to your `tweets_controller.rb`
+
+```
+def index
+  @tweets = Tweet.all
+end
+```
+
+Nex up we will want to display all these tweets in a list on our homepage. Create a file a `app/views/tweets` called `index.html.erb` if the tweets directory doesn't exists, make it.
+
+>PROTIP: On Linux and Mac, you can use `mkdir app/views/tweets` to make the tweets view dir.
+
+Once you've created that `idex.html.erb` file, add the following to it.
+
+```
+<h1>Tweets</h1>
+
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.body %></p>
+<% end %>
+```
