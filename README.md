@@ -235,7 +235,7 @@ end
 
 Nex up we will want to display all these tweets in a list on our homepage. Create a file a `app/views/tweets` called `index.html.erb` if the tweets directory doesn't exists, make it.
 
->PROTIP: On Linux and Mac, you can use `mkdir app/views/tweets` to make the tweets view dir.
+>PROTIP: On Linux and Mac, you can use `mkdir app/views/tweets` to make the tweets views dir.
 
 Once you've created that `idex.html.erb` file, add the following to it.
 
