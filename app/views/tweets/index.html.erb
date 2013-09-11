@@ -1,5 +1,8 @@
 <h1>Tweets</h1>
-
+<%=link_to "New Tweet", new_tweet_path %>
 <% @tweets.each do |tweet| %>
-  <p><%= tweet.body %></p>
+  <p>
+    <%= tweet.user.email %><br/>
+    <%= tweet.body %>
+  </p>
 <% end %>
