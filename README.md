@@ -268,7 +268,7 @@ Finally, open localhost:3000/tweets in your browser and you should see an empty 
 
 **new/create**
 
-Do you think something is missing from this index page? Like, maybe some tweets? Lets add a form so that our users can post tweets. However, this is a bit tricky because we only want authenticated users to post new tweets! Well, it may seem tricky but with rails and devise it doesn't have to be.
+Do you think something is missing from this index page, like tweets? Lets add a form so that our users can post tweets. However, this is a bit tricky because we only want authenticated users to post new tweets! Well, it may seem tricky but with rails and devise it doesn't have to be.
 
 Update your TweetsController.
 
