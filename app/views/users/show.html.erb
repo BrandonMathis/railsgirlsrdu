@@ -1,6 +1,6 @@
-<h1>Tweets</h1>
-<%=link_to "New Tweet", new_tweet_path %>
-<% @tweets.each do |tweet| %>
+<h1><%= @user.email %></h1>
+
+<% @user.tweets.order('created_at DESC').each do |tweet| %>
   <p>
     <%= link_to tweet.user.email, user_path(tweet.user) %><br/>
     <%= tweet.body %>
