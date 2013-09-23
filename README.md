@@ -172,6 +172,16 @@ Just like that we've added authentication to our application. Go to the url `loc
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
 
+Finally add the following to your `app/views/layouts/application.html.erb`
+
+```
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+<% else %>
+  <%= link_to('Login', new_user_session_path)  %>
+<% end %>
+```
+
 ###Tweets
 So, our first two requirements are complete (Users can create accounts andUsers can log into their accounts). Next up we have to deal with tweets.
 
