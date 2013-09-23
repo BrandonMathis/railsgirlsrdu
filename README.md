@@ -122,6 +122,25 @@ After that, type `localhost:3000` into your browser (chrome, safari). If you are
 You should see this page:  
 ![](http://i.imgur.com/SwKp4rB.jpg)
 
+####Rails Setup
+Before we get started we need to take care of two things.
+
+**index.html**
+Delete the following rails-generated index file. This is the Welcome aboard file displayed above. Until you remove it, you cannot see any views your create in your rails app.
+
+Delete File
+
+```
+public/index.html
+```
+**Whitelist Attributes**
+Next we are going to disable attribute whitelisting. This is a default setting that rails activates in order to protect your application from being hacked by nefarious users but it is only going to get in our way for now. For learning purposes, we must deactivate it.
+
+In your `config/application.rb` change your `config.active_record.whitelist_attributes` from `true` to `false`
+
+If you do not deactivate this you will see the error `Can't mass-assign protected attributes`
+
+
 ###User Authentication
 For user authentication we are going to use a gem called [devise](http://rubygems.org/gems/devise) which will make this a snap.
 
