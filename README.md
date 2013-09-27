@@ -122,34 +122,17 @@ After that, type `localhost:3000` into your browser.
 You should see this page:  
 ![](http://i.imgur.com/SwKp4rB.jpg)
 
-####Rails Setup
-Before we get started we need to take care of two things.
-
-**index.html**
-Delete the following rails-generated index file. This is the Welcome aboard file displayed above. Until you remove it, you cannot see any views your create in your rails app.
-
-Delete File
-
-```
-public/index.html
-```
-**Whitelist Attributes**
-Next we are going to disable attribute whitelisting. This is a default setting that rails activates in order to protect your application from being hacked by nefarious users but it is only going to get in our way for now. For learning purposes, we must deactivate it.
-
-In your `config/application.rb` change your `config.active_record.whitelist_attributes` from `true` to `false`
-
-If you do not deactivate this you will see the error `Can't mass-assign protected attributes`
-
-
 ###User Authentication
+
 For user authentication we are going to use a gem called [devise](http://rubygems.org/gems/devise) which will make this a snap.
 
-First, add devise to your Gemfile
+First, add devise to your `Gemfile`
 
 ```
 gem 'devise'
 ```
-Then, go to your terminal or command prompt and type the following
+
+Save the file. Then, go to your terminal or command prompt and type the following
 
 ```
 bundle install
@@ -162,13 +145,16 @@ rails generate devise:install
 rails generate devise User
 ```
 
-The following code generated some models and migrations for us. In order to update our database to conencide with our new code we need to run the following.
+The following code generated some models and migrations for us. In order to update our database to coincide with our new code we need to run the following.
 
 ```
 rake db:migrate
+rails server
 ```
 
-Just like that we've added authentication to our application. Go to the url `localhost:3000/users/sign_up` to see the signup page and create a new user!
+Just like that we've added authentication to our application. Go to the url `http://localhost:3000/users/sign_up` to see the signup page and create a new user!
+
+**EDIT** If users create a new user, they go right back to the default index page. Also, we should be explicit and tell them if we want them to register now or not.
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
 
@@ -182,6 +168,8 @@ Finally add the following to your `app/views/layouts/application.html.erb`
 <% end %>
 ```
 
+**EDIT** I added this, now what? I don't see a diff (because I'm on the default index page which doesn't use the layout?)
+
 ###Tweets
 So, our first two requirements are complete (Users can create accounts andUsers can log into their accounts). Next up we have to deal with tweets.
 
@@ -193,7 +181,7 @@ rails generate model Tweet body:string user:references
 
 This command create a Tweets model and a migration to create a tweets table where we can store the body of a tweet and the users who made the tweet.
 
->PROTIP: `body:string` and `user:references` details the attributes of our tweets. 'references' pertains to an ID of the owning record. In our case, Tweets reference users who make them. You can add any attirbutes you want to a record in this manner when using generators.
+>PROTIP: `body:string` and `user:references` details the attributes of our tweets. 'references' pertains to an ID of the owning record. In our case, Tweets reference users who make them. You can add any attributes you want to a record in this manner when using generators.
 
 ####Model
 
@@ -246,14 +234,16 @@ Now that your table has been created, lets take a look at our views and controll
 ####Controller/Views
 Next we want to display our tweets. In order to do that we are going to need to create a Tweet [controller]() and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
 
-Create a new ruby file at `app/controllers` called 'tweets_controller.rb' with the following contents.
+Create a new ruby file in `app/controllers` called 'tweets_controller.rb' with the following contents.
+
+**EDIT** Couldn't we have had this file generated using `rails g resource` earlier?
 
 ```
 class TweetsController < ApplicationController
 end
 ```
 
-Inside this controller we are going to create 3 actions `index`, `create`, and `new`, but first we need to setup some new routes in our application. Add the following line bellow `devise_for :users`. In your `config/routes.rb` file.
+Inside this controller we are going to create 3 actions `index`, `create`, and `new`, but first we need to setup some new routes in our application. Add the following line below `devise_for :users`. In your `config/routes.rb` file.
 
 ```
 root 'tweets#index'
@@ -272,7 +262,7 @@ def index
 end
 ```
 
-Next we will make our view. Create a file at `app/views/tweets` called `index.html.erb`. If the tweets directory doesn't exists, make it.
+Next we will make our view. Create a file at `app/views/tweets` called `index.html.erb`. If the tweets directory doesn't exist, make it.
 
 >PROTIP: On Linux and Mac, you can use `mkdir app/views/tweets` to make the tweets views dir.
 
@@ -364,7 +354,9 @@ Add the following addition to your `routes.rb` bellow `devise_for :users`.
 get 'users/:id' => 'users#show', as: 'user'
 ```
 
-Create a users_controller.rb
+**EDIT** Why not use `resources :users` instead of manually mapping routes?
+
+Create a users_controller.rb in `app/controllers`:
 
 ```
 class UsersController < ApplicationController
@@ -381,23 +373,22 @@ Create a view at `app/views/users/show.html.erb`
 
 <% @user.tweets.each do |tweet| %>
   <p>
-    <%= link_to tweet.user.email, user_path(tweet.user) %><br/>
     <%= tweet.body %>
   </p>
 <% end %>
 ```
 
-Lastly, add a link to your users show page by adding `link_to tweet.user.email, user_path(tweet.user)` to your `app/views/tweets/index.html.erb`. 
+Next, add a link to your users show page by adding `link_to tweet.user.email, user_path(tweet.user)` to your `app/views/tweets/index.html.erb`, replacing `tweet.user.email`:
 
 ```
-<h1><%= @user.email %></h1>
-
-<% @user.tweets.order('created_at DESC').each do |tweet| %>
+<h1>Tweets</h1>
+<%=link_to "New Tweet", new_tweet_path %>
+<% @tweets.each do |tweet| %>
   <p>
-    <%= link_to tweet.user.email, user_path(tweet.user) %><br/>
+  	<%= link_to tweet.user.email, user_path(tweet.user) %><br />
     <%= tweet.body %>
   </p>
 <% end %>
 ```
 
-Now we can click on the name of the user that makes a tweets to see all tweets made by that user.
+Now we can click on the name of the user that makes a tweets to see all tweets made by that user. See this in action by going to the app and viewing all tweets and clicking on one of the user names: http://localhost:3000/
