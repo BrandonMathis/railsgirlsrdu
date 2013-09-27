@@ -244,7 +244,7 @@ Index will be a list of every tweet that every user makes. It will be the job of
 
 ```
 def index
-  @tweets = Tweet.all.order('created_at DESC')
+  @tweets = Tweet.all.order(:created_at => :desc)
 end
 ```
 
