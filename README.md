@@ -152,9 +152,7 @@ rake db:migrate
 rails server
 ```
 
-Just like that we've added authentication to our application. Go to the url `http://localhost:3000/users/sign_up` to see the signup page and create a new user!
-
-**EDIT** If users create a new user, they go right back to the default index page. Also, we should be explicit and tell them if we want them to register now or not.
+Just like that we've added authentication to our application. Go to the url <http://localhost:3000/users/sign_up> to see the sign up page and create a new user! We'll need a user to create tweets later so make sure you create one now. You will wind up back on the index page when you're done.
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
 
