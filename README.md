@@ -35,7 +35,7 @@ Above is code that defines a person who has a name, can say things, and greet yo
 You should all be running the latest version of ruby 2.0 on your machine, check that you are
 
 **Rails**  
-Rails is the framework you will be using. It is written in Ruby. If you ever get the two confused just remember "Ruby is the Language, Rails in the framwork." We can have Ruby without Rails but we cannot have Rails without Ruby.
+Rails is the framework you will be using. It is written in Ruby. If you ever get the two confused just remember "Ruby is the Language, Rails in the framework." We can have Ruby without Rails but we cannot have Rails without Ruby.
 
 We use Rails to take care of all the heavy lifting of talking to our users via the browsers and showing them the webpages they want filled with the content they asked for. Rails is all about helping you write awesome websites in Ruby!
 
@@ -48,6 +48,15 @@ To achive the desired functionality we will use a series of [gems](http://rubyge
 > Protip: Rails is also considerd a gem but the applications you build with rails are not considered gems!
 
 ##Lets Get Started!
+
+###Know your tools
+
+When you first start developing with Rails, your primary tools are the web browser, the text editor, and the terminal. But it isn't always clear which one you need when you start out. We've given each one an icon to help you along the way.
+
+:pencil: Whenever you see this icon, it means you'll be editing a file in the text editor.
+:computer: This one indicates you'll be entering a command in the terminal, or viewing terminal output.
+:earth_americas: We'll use this to signify stuff you'll do in the browser. It's the *world wide web* right?
+
 ###Your very first Rails app
 So, we received the requirements under 'Details' (above) from our client and we are ready to get started!
 Our first step is to check to make sure we have the latest and greatest version of ruby!
