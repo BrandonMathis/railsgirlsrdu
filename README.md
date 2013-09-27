@@ -156,18 +156,6 @@ Just like that we've added authentication to our application. Go to the url <htt
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
 
-Finally add the following to your `app/views/layouts/application.html.erb`
-
-```
-<% if user_signed_in? %>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-<% else %>
-  <%= link_to('Login', new_user_session_path)  %>
-<% end %>
-```
-
-**EDIT** I added this, now what? I don't see a diff (because I'm on the default index page which doesn't use the layout?)
-
 ###Tweets
 So, our first two requirements are complete (Users can create accounts and Users can log into their accounts). Next up we have to deal with tweets.
 
@@ -330,7 +318,15 @@ Now, the "New Tweet" link on your tweets index page should instruct you to login
 
 ###Users
 
-One thing we are missing is the ability to view tweets a user makes. First, we will need to add the ability for us to collect all the tweets a user makes.
+One thing we are missing is the ability to view tweets a user makes. First, we will need to add the ability for us to collect all the tweets a user makes. Add the following to your `app/views/layouts/application.html.erb` directly underneath the `<body>` tag.
+ 
+```
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+<% else %>
+  <%= link_to('Login', new_user_session_path)  %>
+<% end %>
+```
 
 Open your `user.rb` model and add `has_many :tweets`.
 
@@ -351,8 +347,6 @@ Add the following addition to your `routes.rb` bellow `devise_for :users`.
 ```
 get 'users/:id' => 'users#show', as: 'user'
 ```
-
-**EDIT** Why not use `resources :users` instead of manually mapping routes?
 
 Create a users_controller.rb in `app/controllers`:
 
