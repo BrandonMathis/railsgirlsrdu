@@ -53,9 +53,9 @@ To achive the desired functionality we will use a series of [gems](http://rubyge
 
 When you first start developing with Rails, your primary tools are the web browser, the text editor, and the terminal. But it isn't always clear which one you need when you start out. We've given each one an icon to help you along the way.
 
-:pencil: Whenever you see this icon, it means you'll be editing a file in the text editor.
-:computer: This one indicates you'll be entering a command in the terminal, or viewing terminal output.
-:earth_americas: We'll use this to signify stuff you'll do in the browser. It's the *world wide web* right?
+:pencil: Whenever you see this icon, it means you'll be editing a file in the text editor.  
+:computer: This one indicates you'll be entering a command in the terminal, or viewing terminal output.  
+:earth_americas: We'll use this to signify stuff you'll do in the browser. It's the *world wide web* right?  
 
 ###Your very first Rails app
 So, we received the requirements under 'Details' (above) from our client and we are ready to get started!
