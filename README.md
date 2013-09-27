@@ -250,7 +250,7 @@ end
 
 Next we will make our view. Create a file at `app/views/tweets` called `index.html.erb`. If the tweets directory doesn't exist, make it.
 
->PROTIP: On Linux and Mac, you can use `mkdir app/views/tweets` to make the tweets views dir.
+>PROTIP: On Linux and Mac, you can use the command `mkdir app/views/tweets` to make the tweets views dir.
 
 Once you've created that `index.html.erb` file, add the following to it. This will display all our tweets and the user that made them.
 
