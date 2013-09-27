@@ -117,7 +117,7 @@ Your output should look something like this
 [2013-09-05 12:02:48] INFO  WEBrick::HTTPServer#start: pid=27949 port=3000
 ```
 
-After that, type `localhost:3000` into your browser (chrome, safari). If you are using Internet Explorer stop what you are doing right now and install chrome!!!
+After that, type `localhost:3000` into your browser.
 
 You should see this page:  
 ![](http://i.imgur.com/SwKp4rB.jpg)
