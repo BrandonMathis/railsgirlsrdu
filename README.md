@@ -174,7 +174,7 @@ Just like that we've added authentication to our application. Go to the url `loc
 
 Finally add the following to your `app/views/layouts/application.html.erb`
 
-```ruby
+```erb
 <% if user_signed_in? %>
   <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
 <% else %>
@@ -278,7 +278,7 @@ Next we will make our view. Create a file at `app/views/tweets` called `index.ht
 
 Once you've created that `index.html.erb` file, add the following to it. This will display all our tweets and the user that made them.
 
-```ruby
+```erb
 <h1>Tweets</h1>
 <%=link_to "New Tweet", new_tweet_path %>
 <% @tweets.each do |tweet| %>
@@ -329,7 +329,7 @@ Take a minute to really understand what each line of code is doing here. We are 
 
 We also added new a create actions which will be used to populate the proper objects for our views. Speaking of which, lets finish things up with a new tweet form! Add a `new.html.erb` file to your `app/views/tweets` directory and add the following to it.
 
-```ruby
+```erb
 <h1>New Tweet</h1>
 
 <%= form_for @tweet do |f| %>
@@ -376,7 +376,7 @@ end
 
 Create a view at `app/views/users/show.html.erb`
 
-```ruby
+```erb
 <h1><%= @user.email %></h1>
 
 <% @user.tweets.each do |tweet| %>
@@ -389,7 +389,7 @@ Create a view at `app/views/users/show.html.erb`
 
 Lastly, add a link to your users show page by adding `link_to tweet.user.email, user_path(tweet.user)` to your `app/views/tweets/index.html.erb`. 
 
-```ruby
+```erb
 <h1><%= @user.email %></h1>
 
 <% @user.tweets.order('created_at DESC').each do |tweet| %>
