@@ -169,7 +169,7 @@ Finally add the following to your `app/views/layouts/application.html.erb`
 **EDIT** I added this, now what? I don't see a diff (because I'm on the default index page which doesn't use the layout?)
 
 ###Tweets
-So, our first two requirements are complete (Users can create accounts andUsers can log into their accounts). Next up we have to deal with tweets.
+So, our first two requirements are complete (Users can create accounts and Users can log into their accounts). Next up we have to deal with tweets.
 
 We are going to use rails generators to save some time. This will generate the code we need to create Tweets in our application.
 
@@ -177,9 +177,9 @@ We are going to use rails generators to save some time. This will generate the c
 rails generate model Tweet body:string user:references
 ```
 
-This command create a Tweets model and a migration to create a tweets table where we can store the body of a tweet and the users who made the tweet.
+This command creates a `Tweet` model and a migration to create a `tweets` table where we can store the body of a tweet and the user who made the tweet.
 
->PROTIP: `body:string` and `user:references` details the attributes of our tweets. 'references' pertains to an ID of the owning record. In our case, Tweets reference users who make them. You can add any attributes you want to a record in this manner when using generators.
+>PROTIP: `body:string` and `user:references` details the attributes of our tweets. `references` pertains to an ID of the owning record. In our case, Tweets reference users who make them. You can add any attributes you want to a record in this manner when using generators.
 
 ####Model
 
@@ -230,7 +230,7 @@ Now that your table has been created, lets take a look at our views and controll
 > PROTIP: If you've run a migration that is incorrect in some way, run rake db:rollback to reset the migration an THEN go back to your migration code and fix it.
 
 ####Controller/Views
-Next we want to display our tweets. In order to do that we are going to need to create a Tweet [controller]() and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
+Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
 
 Create a new ruby file in `app/controllers` called 'tweets_controller.rb' with the following contents.
 
