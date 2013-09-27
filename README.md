@@ -232,14 +232,14 @@ Now that your table has been created, lets take a look at our views and controll
 ####Controller/Views
 Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
 
-Create a new ruby file in `app/controllers` called 'tweets_controller.rb' with the following contents.
 
-**EDIT** Couldn't we have had this file generated using `rails g resource` earlier?
+To create a new controller, we can use the Rails generator again.
 
 ```
-class TweetsController < ApplicationController
-end
+rails generate controller tweets
 ```
+
+This will create file `app/controllers/tweets_controller.rb` as well as helpers, test helpers, stylesheets, and javascript files for us to use. But we're going to focus on the controller file.
 
 Inside this controller we are going to create 3 actions `index`, `create`, and `new`, but first we need to setup some new routes in our application. Add the following line below `devise_for :users`. In your `config/routes.rb` file.
 
