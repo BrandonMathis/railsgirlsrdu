@@ -15,7 +15,7 @@ The RailsGirls Twitter client is a simplified twitter-esqu application mean to d
 **Ruby**  
 Ruby is the language you will be working in. It looks like this!  
 
-```
+```ruby
 class Person
   attr_accessor :name
   
@@ -128,7 +128,7 @@ For user authentication we are going to use a gem called [devise](http://rubygem
 
 First, add devise to your `Gemfile`
 
-```
+```ruby
 gem 'devise'
 ```
 
@@ -156,6 +156,16 @@ Just like that we've added authentication to our application. Go to the url <htt
 
 >PROTIP: Never use one of your own passwords to create a user when developing an application! Use some junk password like 'securepassword'
 
+Finally add the following to your `app/views/layouts/application.html.erb`
+
+```erb
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+<% else %>
+  <%= link_to('Login', new_user_session_path)  %>
+<% end %>
+```
+
 ###Tweets
 So, our first two requirements are complete (Users can create accounts and Users can log into their accounts). Next up we have to deal with tweets.
 
@@ -173,7 +183,7 @@ This command creates a `Tweet` model and a migration to create a `tweets` table 
 
 One of the files we generated was a Tweet model. We will use this Model to create, update, and destroy Tweets with commands like `Tweet.create`, `Tweet.update_attributes`, and `Tweet.destroy`. Take a look in your `app/models` directory. You should see a newly created file called `tweet.rb` with the following contents
 
-```
+```ruby
 class Tweet < ActiveRecord::Base
   belongs_to :user
 end
@@ -186,7 +196,7 @@ This is an [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.htm
 
 The next thing generated was a [migration](http://guides.rubyonrails.org/migrations.html). Look inside your `db/migrations` directory. You will se a file that looks something like `20130908173312_create_tweets.rb`. Your file's name may not be the same but the contents will be.
 
-```
+```ruby
 class CreateTweets < ActiveRecord::Migration
   def change
     create_table :tweets do |t|
@@ -221,17 +231,14 @@ Now that your table has been created, lets take a look at our views and controll
 Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
 
 
-To create a new controller, we can use the Rails generator again.
-
-```
-rails generate controller tweets
+```ruby
+class TweetsController < ApplicationController
+end
 ```
 
 This will create file `app/controllers/tweets_controller.rb` as well as helpers, test helpers, stylesheets, and javascript files for us to use. But we're going to focus on the controller file.
 
-Inside this controller we are going to create 3 actions `index`, `create`, and `new`, but first we need to setup some new routes in our application. Add the following line below `devise_for :users`. In your `config/routes.rb` file.
-
-```
+```ruby
 root 'tweets#index'
 resources :tweets, only: [:new, :index, :create]
 ```
@@ -242,7 +249,7 @@ Now lets get started on our actions.
 
 Index will be a list of every tweet that every user makes. It will be the job of our controller to collect all the tweets and the view will display them. Add the following code to your `tweets_controller.rb`
 
-```
+```ruby
 def index
   @tweets = Tweet.all.order(:created_at => :desc)
 end
@@ -254,7 +261,7 @@ Next we will make our view. Create a file at `app/views/tweets` called `index.ht
 
 Once you've created that `index.html.erb` file, add the following to it. This will display all our tweets and the user that made them.
 
-```
+```erb
 <h1>Tweets</h1>
 <%=link_to "New Tweet", new_tweet_path %>
 <% @tweets.each do |tweet| %>
@@ -279,7 +286,7 @@ Now, lets add a form so that our users can post tweets. However, this is a bit t
 
 Update your TweetsController.
 
-```
+```ruby
 class TweetsController < ApplicationController
   before_filter :authenticate_user!, only: [:create, :new]
 
@@ -305,7 +312,7 @@ Take a minute to really understand what each line of code is doing here. We are 
 
 We also added new a create actions which will be used to populate the proper objects for our views. Speaking of which, lets finish things up with a new tweet form! Add a `new.html.erb` file to your `app/views/tweets` directory and add the following to it.
 
-```
+```erb
 <h1>New Tweet</h1>
 
 <%= form_for @tweet do |f| %>
@@ -330,7 +337,7 @@ One thing we are missing is the ability to view tweets a user makes. First, we w
 
 Open your `user.rb` model and add `has_many :tweets`.
 
-```
+```ruby
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -344,13 +351,13 @@ After that we need to update our routes, controller, and views so that we have a
 
 Add the following addition to your `routes.rb` bellow `devise_for :users`.
 
-```
+```ruby
 get 'users/:id' => 'users#show', as: 'user'
 ```
 
 Create a users_controller.rb in `app/controllers`:
 
-```
+```ruby
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
@@ -360,11 +367,12 @@ end
 
 Create a view at `app/views/users/show.html.erb`
 
-```
+```erb
 <h1><%= @user.email %></h1>
 
 <% @user.tweets.each do |tweet| %>
   <p>
+    <%= link_to tweet.user.email, user_path(tweet.user) %><br/>
     <%= tweet.body %>
   </p>
 <% end %>
