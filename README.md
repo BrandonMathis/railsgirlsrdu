@@ -390,7 +390,12 @@ Add the following addition to your `routes.rb` bellow `devise_for :users`.
 get 'users/:id' => 'users#show', as: 'user'
 ```
 
-Create a users_controller.rb in `app/controllers`:
+Create a Users controller using the rails generator.
+
+:computer:
+```
+rails generate controller users
+```
 
 :pencil:
 ```ruby
