@@ -131,14 +131,17 @@ You should see this page:
 
 For user authentication we are going to use a gem called [devise](http://rubygems.org/gems/devise) which will make this a snap.
 
-First, add devise to your `Gemfile`
+First, we need to tell Rails we want to use devise. We can do that with our
+application's `Gemfile`. Each application has a file called simply `Gemfile`
+which contains a list of Ruby gems we want to use in our application. To add a
+new one, we open the `Gemfile` in our text editor and add the line
 
 :pencil:
 ```ruby
 gem 'devise'
 ```
 
-Save the file. Then, go to your terminal or command prompt and type the following
+anywhere in the file. Save the file. Then, go to your terminal or command prompt and type the following
 
 :computer:
 ```
