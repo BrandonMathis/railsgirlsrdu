@@ -254,7 +254,15 @@ Now that your table has been created, lets take a look at our views and controll
 > PROTIP: If you've run a migration that is incorrect in some way, run rake db:rollback to reset the migration an THEN go back to your migration code and fix it.
 
 ####Controller/Views
-Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
+Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users.
+
+In order to start, we'll define some routes. To do so, open your `config/routes.rb` file and add the line below `devise_for :users`.
+
+:pencil:
+```ruby
+root 'tweets#index'
+resources :tweets, only: [:new, :index, :create]
+```
 
 To create a controller, we can use a Rails generator
 
@@ -264,12 +272,6 @@ rails generate controller tweets
 ```
 
 This will create file `app/controllers/tweets_controller.rb` as well as helpers, test helpers, stylesheets, and javascript files for us to use. But we're going to focus on the controller file.
-
-:pencil:
-```ruby
-root 'tweets#index'
-resources :tweets, only: [:new, :index, :create]
-```
 
 Now lets get started on our actions.
 
@@ -384,7 +386,7 @@ end
 
 After that we need to update our routes, controller, and views so that we have a user show page that gives us a list of all tweets a user has made.
 
-Add the following addition to your `routes.rb` bellow `devise_for :users`.
+Add the following addition to your `config/routes.rb` below our `resources :tweets` line from earlier.
 
 :pencil:
 ```ruby
