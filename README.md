@@ -268,7 +268,7 @@ Now lets get started on our actions.
 
 Index will be a list of every tweet that every user makes. It will be the job of our controller to collect all the tweets and the view will display them. Add the following code to your `tweets_controller.rb`
 
-:pencil:j `app/controllers/tweets_controller.rb`
+:pencil: `app/controllers/tweets_controller.rb`
 ```ruby
 def index
   @tweets = Tweet.all.order(:created_at => :desc)
