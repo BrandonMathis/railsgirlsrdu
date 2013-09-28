@@ -145,7 +145,7 @@ application's `Gemfile`. Each application has a file called simply `Gemfile`
 which contains a list of Ruby gems we want to use in our application. To add a
 new one, we open the `Gemfile` in our text editor and add the line
 
-:pencil:
+:pencil: `Gemfile`
 ```ruby
 gem 'devise'
 ```
@@ -195,7 +195,7 @@ This command creates a `Tweet` model and a migration to create a `tweets` table 
 
 One of the files we generated was a Tweet model. We will use this Model to create, update, and destroy Tweets with commands like `Tweet.create`, `Tweet.update_attributes`, and `Tweet.destroy`. Take a look in your `app/models` directory. You should see a newly created file called `tweet.rb` with the following contents
 
-:pencil:
+:pencil: `app/models/tweet.rb`
 ```ruby
 class Tweet < ActiveRecord::Base
   belongs_to :user
@@ -209,7 +209,7 @@ This is an [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.htm
 
 The next thing generated was a [migration](http://guides.rubyonrails.org/migrations.html). Look inside your `db/migrations` directory. You will se a file that looks something like `20130908173312_create_tweets.rb`. Your file's name may not be the same but the contents will be.
 
-:pencil:
+:pencil: `db/migrate/20130927025933_create_tweets.rb` (Your huge number will be different and that's normal.)
 ```ruby
 class CreateTweets < ActiveRecord::Migration
   def change
@@ -247,7 +247,7 @@ Next we want to display our tweets. In order to do that we are going to need to 
 
 In order to start, we'll define some routes. To do so, open your `config/routes.rb` file and add the line below `devise_for :users`.
 
-:pencil:
+:pencil: `config/routes.rb`
 ```ruby
 root 'tweets#index'
 resources :tweets, only: [:new, :index, :create]
@@ -268,7 +268,7 @@ Now lets get started on our actions.
 
 Index will be a list of every tweet that every user makes. It will be the job of our controller to collect all the tweets and the view will display them. Add the following code to your `tweets_controller.rb`
 
-:pencil:
+:pencil:j `app/controllers/tweets_controller.rb`
 ```ruby
 def index
   @tweets = Tweet.all.order(:created_at => :desc)
@@ -281,7 +281,7 @@ Next we will make our view. Create a file at `app/views/tweets` called `index.ht
 
 Once you've created that `index.html.erb` file, add the following to it. This will display all our tweets and the user that made them.
 
-:pencil:
+:pencil: `app/views/tweets/index.html.erb`
 ```erb
 <h1>Tweets</h1>
 <%=link_to "New Tweet", new_tweet_path %>
@@ -308,7 +308,7 @@ Now, lets add a form so that our users can post tweets. However, this is a bit t
 
 Update your TweetsController.
 
-:pencil:
+:pencil: `app/controllers/tweets_controller.rb`
 ```ruby
 class TweetsController < ApplicationController
   before_filter :authenticate_user!, only: [:create, :new]
@@ -335,7 +335,7 @@ Take a minute to really understand what each line of code is doing here. We are 
 
 We also added new a create actions which will be used to populate the proper objects for our views. Speaking of which, lets finish things up with a new tweet form! Add a `new.html.erb` file to your `app/views/tweets` directory and add the following to it.
 
-:pencil:
+:pencil: `app/views/tweets/new.html.erb`
 ```erb
 <h1>New Tweet</h1>
 
@@ -351,7 +351,7 @@ Now, the "New Tweet" link on your tweets index page should instruct you to login
 
 One thing we are missing is the ability to view tweets a user makes. First, we will need to add the ability for us to collect all the tweets a user makes. Add the following to your `app/views/layouts/application.html.erb` directly underneath the `<body>` tag.
 
-:pencil:
+:pencil: `app/views/layout/application.html.erb`
 ```erb
 <% if user_signed_in? %>
   <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
@@ -362,7 +362,7 @@ One thing we are missing is the ability to view tweets a user makes. First, we w
 
 Open your `user.rb` model and add `has_many :tweets`.
 
-:pencil:
+:pencil: `app/models/user.rb`
 ```ruby
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -377,7 +377,7 @@ After that we need to update our routes, controller, and views so that we have a
 
 Add the following addition to your `config/routes.rb` below our `resources :tweets` line from earlier.
 
-:pencil:
+:pencil: `config/routes.rb`
 ```ruby
 get 'users/:id' => 'users#show', as: 'user'
 ```
@@ -389,7 +389,7 @@ Create a Users controller using the rails generator.
 rails generate controller users
 ```
 
-:pencil:
+:pencil: `app/controllers/users_controller.rb`
 ```ruby
 class UsersController < ApplicationController
   def show
@@ -400,7 +400,7 @@ end
 
 Create a view at `app/views/users/show.html.erb`
 
-:pencil:
+:pencil: `app/views/users/show.html.erb`
 ```erb
 <h1><%= @user.email %></h1>
 
@@ -414,7 +414,7 @@ Create a view at `app/views/users/show.html.erb`
 
 Next, add a link to your users show page by adding `link_to tweet.user.email, user_path(tweet.user)` to your `app/views/tweets/index.html.erb`, replacing `tweet.user.email`:
 
-:pencil:
+:pencil: `app/views/tweets/index.html.erb`
 ```erb
 <h1>Tweets</h1>
 <%=link_to "New Tweet", new_tweet_path %>
