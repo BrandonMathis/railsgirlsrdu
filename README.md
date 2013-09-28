@@ -257,6 +257,7 @@ Now that your table has been created, lets take a look at our views and controll
 Next we want to display our tweets. In order to do that we are going to need to create a Tweet controller and some views. Controllers pull data out of the database like tweet content and serve that content up to views which render the HTML that is displayed to the users. Lets start with our controllers.
 
 To create a controller, we can use a Rails generator
+
 :computer:
 ```
 rails generate controller tweets
