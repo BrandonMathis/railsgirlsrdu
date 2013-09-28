@@ -1,13 +1,13 @@
-# RailsGirls Twitter
+# Rails Girls Twitter
 
 **Details**  
-The RailsGirls Twitter client is a simplified twitter-esqu application mean to duplicate the very basics behind the [twitter](https://twitter.com/) social media platform. This application will meet the following set of requirements:  
+The Rails Girls Twitter client is a simplified twitter-esque application mean to duplicate the very basics behind the [twitter](https://twitter.com/) social media platform. This application will meet the following set of requirements:  
 
 * Users can create accounts
 * Users can log into their accounts
 * Users can post tweets
 * Users can view all tweets
-* When a users visits her own profile she see's her own tweets.
+* When a users visits her own profile she sees her own tweets.
 * When a user visits another user's profile she sees that user's tweets
 * Tweets are no longer than 256 characters
 
@@ -37,15 +37,15 @@ You should all be running the latest version of ruby 2.0 on your machine, check 
 **Rails**  
 Rails is the framework you will be using. It is written in Ruby. If you ever get the two confused just remember "Ruby is the Language, Rails in the framework." We can have Ruby without Rails but we cannot have Rails without Ruby.
 
-We use Rails to take care of all the heavy lifting of talking to our users via the browsers and showing them the webpages they want filled with the content they asked for. Rails is all about helping you write awesome websites in Ruby!
+We use Rails to take care of all the heavy lifting of talking to our users via the browsers and showing them the web pages they want filled with the content they asked for. Rails is all about helping you write awesome websites in Ruby!
 
 If you do not have rails installed on your machine, install it:
 
 
 **Gems**  
-To achive the desired functionality we will use a series of [gems](http://rubygems.org). Gems are packets of code that can extend the functionality of your application. We call thems gems because they are written in ruby!
+To achieve the desired functionality we will use a series of [gems](http://rubygems.org). Gems are packets of code that can extend the functionality of your application. We call them gems because they are written in ruby!
 
-> Protip: Rails is also considerd a gem but the applications you build with rails are not considered gems!
+> Protip: Rails is also considered a gem but the applications you build with rails are not considered gems!
 
 ##Lets Get Started!
 
@@ -75,7 +75,7 @@ Our next step is to create a new rails application
 rails new twitter
 ```
 
-If the above command doesnt work then make sure you have rails installed on your machine by running:
+If the above command doesn't work then make sure you have rails installed on your machine by running:
 
 :computer:
 ```
@@ -92,7 +92,7 @@ Sadly, rails still need a little help from us to get started. Step into your new
 cd twitter
 ```
 
-Inside here you can type `ls` (mac and linux) or `dir` (windows) to see a list of all the files and folders that `rails new` created. It should look something like this
+Inside here you can type `ls` (Mac OS and Linux) or `dir` (Windows) to see a list of all the files and folders that `rails new` created. It should look something like this
 
 ```
 Gemfile
@@ -277,7 +277,7 @@ end
 
 Next we will make our view. Create a file at `app/views/tweets` called `index.html.erb`. If the tweets directory doesn't exist, make it.
 
->PROTIP: On Linux and Mac, you can use the command `mkdir app/views/tweets` to make the tweets views dir.
+>PROTIP: On Linux and Mac, you can use the command `mkdir app/views/tweets` to make the tweets views directory.
 
 Once you've created that `index.html.erb` file, add the following to it. This will display all our tweets and the user that made them.
 
@@ -331,7 +331,7 @@ class TweetsController < ApplicationController
 end
 ```
 
-Take a minute to really understand what each line of code is doing here. We are creating a [before_filter](http://guides.rubyonrails.org/action_controller_overview.html#filters) that will be ensuring our visitor is an authenicated user before hitting our new and creat actions. This single line of code will handle everything from blocking anonymous users from posting a tweet to redirecting those anonymous users to sign in or sign up for a new account when they try to post a tweet.
+Take a minute to really understand what each line of code is doing here. We are creating a [before_filter](http://guides.rubyonrails.org/action_controller_overview.html#filters) that will be ensuring our visitor is an authenticated user before hitting our new and create actions. This single line of code will handle everything from blocking anonymous users from posting a tweet to redirecting those anonymous users to sign in or sign up for a new account when they try to post a tweet.
 
 We also added new a create actions which will be used to populate the proper objects for our views. Speaking of which, lets finish things up with a new tweet form! Add a `new.html.erb` file to your `app/views/tweets` directory and add the following to it.
 
@@ -345,7 +345,7 @@ We also added new a create actions which will be used to populate the proper obj
 <% end %>
 ```
 
-Now, the "New Tweet" link on your tweets index page should instruct you to login. From there, click "Sign up" to create a new user account (link under login form). Once you have a new user created, log that user. Craft your tweet and post it! Just like that we have the basics down for signup, login, and tweet posting!
+Now, the "New Tweet" link on your tweets index page should instruct you to login. From there, click "Sign up" to create a new user account (link under login form). Once you have a new user created, log that user. Craft your tweet and post it! Just like that we have the basics down for sign up, login, and tweet posting!
 
 ###Users
 
